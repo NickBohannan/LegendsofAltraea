@@ -3,6 +3,8 @@ require(__dirname + '/Resources/config.js');
 const fs = require('fs');
 const net = require('net');
 
+require("./packet.js")
+
 //load init files
 const init_files = fs.readdirSync(__dirname + "/Initializers");
 init_files.forEach((initFile) => {

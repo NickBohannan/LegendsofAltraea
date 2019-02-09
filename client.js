@@ -7,7 +7,11 @@ module.exports = function() {
     //this.user = {}
 
     this.initiate = function() {
-        //do shit
+        var client = this
+        
+        client.socket.write(packet.build(["HELLO", now().toString()]))
+
+        console.log('client initiated')
     }
 
     this.data = function(data) {
