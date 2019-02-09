@@ -7,7 +7,9 @@
         "extend": "*",
         "binary-parser": "*",
         "mongoose": "*",
-        "underscore": "*"
+        "underscore": "*",
+        "performance": "*",
+        "performance-now": "*"
     },
     "scripts": {
         "start": "node server.js --env=production",

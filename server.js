@@ -20,8 +20,25 @@ model_files.forEach((modelFile) => {
 //load model_file maps
 maps = {};
 const map_files = fs.readdirSync(config.data_paths.maps);
-init_files.forEach((mapFile) => {
+map_files.forEach((mapFile) => {
     console.log('Loading Map: ' + mapFile);
-    var map = require(config.data_paths + mapFile);
+    var map = require(config.data_paths.maps + mapFile);
     maps[map.room] = map;
 })
+
+//create server and listen
+net.createServer((socket) => {
+    console.log("socket connected")
+    
+    var C_inst = new require('./client.js')
+    var thisClient = new C_inst()
+
+    thisClient.socket = socket
+    thisClient.initiate();
+
+    socket.on('error', thisClient.error)
+    socket.on('end', thisClient.end)
+    socket.on('data', thisClient.data)
+}).listen(config.port)
+
+console.log("Initialization complete. Server running on port " + config.port + " in " + config.environment + " environment.")
