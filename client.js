@@ -9,7 +9,7 @@ module.exports = function() {
     this.initiate = function() {
         var client = this
         
-        client.socket.write(packet.build(["HELLO", now().toString()]))
+        client.socket.write(packet.build(["HELLO", now().toString()])) // now gives server time in milliseconds
 
         console.log('client initiated')
     }

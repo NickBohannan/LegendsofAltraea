@@ -11,11 +11,11 @@ module.exports = packet = {
             var buffer
 
             if (typeof param === 'string') {
-                buffer = new Buffer(param, 'utf8')
+                buffer = new Buffer.from(param, 'utf8')
                 buffer = Buffer.concat([buffer, zeroBuffer], buffer.length + 1)
             }
             else if (typeof param === 'number') {
-                buffer = new Buffer(2)
+                buffer = new Buffer.alloc(2) // 2 bytes for unsigned integer
                 buffer.writeUInt16LE(param, 0)
             }
             else {
@@ -28,7 +28,7 @@ module.exports = packet = {
 
         var dataBuffer = Buffer.concat(packetParts, packetSize)
 
-        var size = new Buffer(1)
+        var size = new Buffer.alloc(1)
         size.writeUInt8(dataBuffer.length + 1, 0)
 
         var finalPacket = Buffer.concat([size, dataBuffer], size.length + dataBuffer.length)
